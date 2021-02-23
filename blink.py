@@ -7,6 +7,6 @@ GPIO.setup(18, GPIO.OUT)                            # Set pin 8 to be an output 
 
 while True:                                         # Run forever
      GPIO.output(18, True)                          # Turn on
-     time.sleep(2)                                  # Sleep for 1 second
+     time.sleep(1)                                  # Sleep for 1 second
      GPIO.output(18, False)                         # Turn off
-     time.sleep(2) 
+     time.sleep(1) 
