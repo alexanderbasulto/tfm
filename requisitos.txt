@@ -11,8 +11,11 @@ depthai==2.10.0.0
 pytube==11.0.0
 adafruit-circuitpython-apds9960
 Adafruit-Blinka
-Adafruit_GPIO.I2C
 adafruit-circuitpython-busdevice
 adafruit-circuitpython-register
 python-smbus
 i2c-tools
+azure-iot-device
+azure-iot-hub
+azure-iothub-service-client
+azure-iothub-device-client
