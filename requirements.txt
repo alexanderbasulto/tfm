@@ -1,5 +1,11 @@
-scipy==1.6.0
-numpy==1.19.4
-opencv-python==4.2.0.34; platform_machine != "armv7l"
-opencv-python==4.1.0.25; platform_machine == "armv7l"
-depthai==2.7.2.0
+opencv-python==4.5.1.48; platform_machine != "aarch64" and platform_machine != "armv6l" and platform_machine != "armv7l"
+opencv-contrib-python==4.5.1.48; platform_machine != "aarch64" and platform_machine != "armv6l" and platform_machine != "armv7l"
+opencv-python==4.4.0.46; platform_machine == "armv6l" or platform_machine == "armv7l"
+opencv-contrib-python==4.4.0.46; platform_machine == "armv6l" or platform_machine == "armv7l"
+requests==2.24.0
+argcomplete==1.12.1
+blobconverter==1.0.0
+# --extra-index-url https://artifacts.luxonis.com/artifactory/luxonis-python-snapshot-local/
+# depthai==2.5.0.0.dev+568cf1c566056eac5a039ebb9a1fa74436c495b5
+depthai==2.10.0.0
+pytube==11.0.0
