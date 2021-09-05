@@ -24,18 +24,17 @@ if __name__ == '__main__':
     print('Red: {0}, Green: {1}, Blue: {2}, Clear: {3}'.format(r, g, b, c))
     v_cerca = sensor.proximity
     print("Valor de Proximidad: ", v_cerca)
-    try:
-        while True:
-            gesture = apds.gesture()
+    while True:
+        gesture = apds.gesture()
 
-            if gesture == 0x01:
-                print("arriba")
-            elif gesture == 0x02:
-                print("abajo")
-            elif gesture == 0x03:
-                print("izquierda")
-            elif gesture == 0x04:
-                print("derecha")
+        if gesture == 0x01:
+            print("arriba")
+        elif gesture == 0x02:
+            print("abajo")
+        elif gesture == 0x03:
+            print("izquierda")
+        elif gesture == 0x04:
+            print("derecha")
 
     except KeyboardInterrupt:
         print ( "Prueba Terminada" )

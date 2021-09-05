@@ -36,11 +36,10 @@ if __name__ == '__main__':
     print ( "Inicio de Prueba del Chip MLX90614" )
     print ( "Presione Ctrl-C para salir" )
     try:
-        while True:
-            read_temp_sensor()
-            print ( "En espera por ", sleep_time, " segundos")
-            print ( "*" * 40)
-            time.sleep(sleep_time)
+        read_temp_sensor()
+        print ( "En espera por ", sleep_time, " segundos")
+        print ( "*" * 40)
+        time.sleep(sleep_time)
     except KeyboardInterrupt:
         print ( "Prueba Terminada" )
 
