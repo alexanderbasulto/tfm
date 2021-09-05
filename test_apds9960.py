@@ -15,8 +15,6 @@ apds.enable_proximity = True
 apds.enable_gesture = True
 sensor.enable_color = True
 
-
-# INICIO DE LA FUNCION DEL SENSOR APDS9960
 try:
     print ( "Inicio de Prueba el Chip APDS9960" )
     print ( "Presione Ctrl-C para salir" )
@@ -38,5 +36,3 @@ try:
 
 except KeyboardInterrupt:
     print ( "Prueba Terminada" )
-
-# FIN DE LA FUNCION DEL SENSOR APDS9960

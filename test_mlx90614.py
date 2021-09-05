@@ -4,7 +4,6 @@ import time
 I2C.require_repeated_start()
 sleep_time = 1
 
-#SE DEFINE LA FUNCION DEL SENSOR DE TEMPERATURA MLX90614
 class Melexis:                  
 
     def __init__(self, address=0x5A):
@@ -30,11 +29,10 @@ def read_temp_sensor():
     t = sensor.readObject1()
     a = sensor.readAmbient()
     print("Temp. Objecto: {}C , Temp. Ambiente: {}C".format(round(t, 3), round(a, 3)))
-#FINAL DE LA FUNCION DE MEDIR TEMPERATURA        
 
+try:
     print ( "Inicio de Prueba del Chip MLX90614" )
     print ( "Presione Ctrl-C para salir" )
-try:
     while True:
         read_temp_sensor()
         print ( "En espera por ", sleep_time, " segundos")
@@ -42,5 +40,3 @@ try:
         time.sleep(sleep_time)
 except KeyboardInterrupt:
     print ( "Prueba Terminada" )
-
-# FIN DE LA FUNCION DEL SENSOR APDS9960
