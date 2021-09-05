@@ -37,7 +37,7 @@ class Melexis:
         temp = temp * .02 - 273.15
         return temp
 
-def readsensor():
+def read_temp_sensor():
     sensor = Melexis()
     t = sensor.readObject1()
     a = sensor.readAmbient()
@@ -68,10 +68,12 @@ if __name__ == '__main__':
     try:
         while True:
             print ( "Leyendo Sensores" )
+            print ( "Valores del Chip APDS9960" )
             v_cerca = sensor.proximity
             print("Valor de Proximidad: ", v_cerca)
-            readsensor()
             gesture_read()
+            print ( "Medicion de Temperatura con el Chip MLX90614")
+            read_temp_sensor()
             print ( "En espera por ", sleep_time, " segundos")
             print ( "*" * 40)
             time.sleep(sleep_time)
