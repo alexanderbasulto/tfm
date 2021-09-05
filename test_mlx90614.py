@@ -35,11 +35,18 @@ def read_temp_sensor():
     print ( "Inicio de Prueba del Chip MLX90614" )
     print ( "Presione Ctrl-C para salir" )
     try:
-        read_temp_sensor()
-        print ( "En espera por ", sleep_time, " segundos")
-        print ( "*" * 40)
-        time.sleep(sleep_time)
-    except KeyboardInterrupt:
-        print ( "Prueba Terminada" )
+        while True:
+            read_temp_sensor()
+            print ( "En espera por ", sleep_time, " segundos")
+            print ( "*" * 40)
+            time.sleep(sleep_time)
+except KeyboardInterrupt:
+    # CTRL+C
+    print("\nPrueba Terminada")
+except:
+    print("Otra interrupcion")
+finally:
+    GPIO.cleanup()
+    print("GPIO.cleanup() ejecutado")
 
 # FIN DE LA FUNCION DEL SENSOR APDS9960
