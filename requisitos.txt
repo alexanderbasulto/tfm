@@ -13,7 +13,6 @@ adafruit-circuitpython-apds9960
 Adafruit-Blinka
 adafruit-circuitpython-busdevice
 adafruit-circuitpython-register
-i2c-tools
 azure-iot-device
 azure-iot-hub
 azure-iothub-service-client
