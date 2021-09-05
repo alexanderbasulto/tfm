@@ -72,6 +72,7 @@ if __name__ == '__main__':
             v_cerca = sensor.proximity
             print("Valor de Proximidad: ", v_cerca)
             gesture_read()
+            print ( "*" * 40)
             print ( "Medicion de Temperatura con el Chip MLX90614")
             read_temp_sensor()
             print ( "En espera por ", sleep_time, " segundos")
