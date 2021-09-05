@@ -32,10 +32,9 @@ def read_temp_sensor():
     print("Temp. Objecto: {}C , Temp. Ambiente: {}C".format(round(t, 3), round(a, 3)))
 #FINAL DE LA FUNCION DE MEDIR TEMPERATURA        
 
-if __name__ == '__main__':
     print ( "Inicio de Prueba del Chip MLX90614" )
     print ( "Presione Ctrl-C para salir" )
-    while True:
+    try:
         read_temp_sensor()
         print ( "En espera por ", sleep_time, " segundos")
         print ( "*" * 40)
