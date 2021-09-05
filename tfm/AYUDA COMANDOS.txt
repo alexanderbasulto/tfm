@@ -1,0 +1,122 @@
+Raspberry PI
+User: pi
+pass: koki2021
+
+User: git
+Pass: koki2021
+
+IP de la PI:192.168.68.117
+
+Ver puertos:
+netstat -na | grep -1 tcp
+
+
+**************************************************************************
+Para instalar las dependencias de package.json con cmd entramos a la capeta
+y usamos el comando npm install
+
+Para ejecutar el programa usamos:
+node register-device.js
+node simulated-device.js
+node read-iot-messages
+
+Para detener el programa usamos ctrl+c
+***************************************************************************
+***********Usar variables de entorno para los ConnectionString************
+***************************************************************************
+Comandos para actualizar Git:
+git status
+git add .
+git commit -m "Update"
+git push
+
+git clone https://github.com/alexanderbasulto/tfm.git    clona el repositorio
+
+https://webappiot1.azurewebsites.net/
+
+python blink.py	-------------EJECUTAR PROGRAMA
+
+ENTRAR A LA CARPETA EN LA PI DE GITHUB:
+
+pi@raspberrypi:~ $ cd Documents
+pi@raspberrypi:~/Documents $ cd github
+pi@raspberrypi:~/Documents/github $ cd tfm
+pi@raspberrypi:~/Documents/github/tfm $
+
+*******************************************************************************
+********************************* OAK-D ***************************************
+*******************************************************************************
+Instalar dependencias
+*sudo curl -fL http://docs.luxonis.com/_static/install_dependencies.sh | bash
+
+*Paquete Depthai
+python3 -m pip install depthai
+
+*Instalar VirtualENV
+sudo pip install virtualenv
+
+*Ejecutar entorno virtual para correr la aplicacion
+virtualenv venv && source venv/bin/activate
+
+*Ver camara 
+cd depthai-python/examples
+python3 rgb_preview.py
+
+*Ejemplos:
+https://docs.luxonis.com/projects/api/en/latest/tutorials/code_samples/
+*******************************************************************************
+cd depthai-python/examples/depthai-experiments/gen2-fatigue-detection
+python3 -m pip install -r requirements.txt
+python main.py -cam
+
+cd depthai-python/examples/depthai-experiments/depthai_hand_tracker
+python main.py -cam
+
+cd depthai-python/examples/depthai-experiments/gen2-head-posture-detection
+
+cd depthai-python/examples/depthai-experiments/gen2-webrtc-streaming
+
+cd depthai-python/examples/depthai-experiments/depthai_hand_tracker
+./demo.py -g
+
+cd depthai-python/examples/depthai-experiments/gen2-mjpeg-streaming
+
+******************************************************************************
+INSTALACION LIBRERIAS AZURE IOT HUB EN Raspberry
+sudo pip3 install azure-iot-device
+sudo pip3 install azure-iot-hub
+sudo pip3 install azure-iothub-service-client
+sudo pip3 install azure-iothub-device-client
+
+******Primary Connection String
+HostName=IothubTFM.azure-devices.net;DeviceId=gateway;SharedAccessKey=GdfSD3J6RF0Eou14oJwTkV+a86AXlrD0QEae3HxAguc=
+
+******Agregar extension de azure iot al Azure CLI
+az extension add --name azure-iot
+
+******Iniciar el monitoreo de iot-hub y ejecutar el simulatedDevice.py en la PI
+az iot hub monitor-events --hub-name IothubTFM --device-id gateway
+
+*******Server login
+tfmdb
+Abc12345+
+
+*******New Qwery SQL Server Management
+CREATE TABLE TelemetryData
+(
+TelemetryDataId int identity(1,1) PRIMARY KEY NOT NULL,
+Temperature decimal(18,2),
+Humidity decimal(18,2),
+LogDate datetime DEFAULT GETDATE()
+)
+
+
+SELECT
+    AVG(temperature) AS temperature,
+    AVG(humidity) AS humidity
+INTO
+    [AzureSQLDb]
+FROM
+    [FromIotHub]
+GROUP BY
+    TumblingWindow(Duration(minute, 1), Offset(millisecond, -1))
