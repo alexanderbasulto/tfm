@@ -16,7 +16,6 @@ GPIO.setup(pin_led, GPIO.OUT) #Configuramos el GPIO18 como salida
 int_pin = 16
 GPIO.setup(int_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
-
 sensor.enable_proximity = True
 sensor.proximity_interrupt_threshold = (0, 175)
 sensor.enable_proximity_interrupt = True

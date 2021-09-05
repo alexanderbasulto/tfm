@@ -1,6 +1,5 @@
 # Copyright (c) Microsoft. All rights reserved.
 # Licensed under the MIT license. See LICENSE file in the project root for full license information.
-import random
 import time
 import Adafruit_GPIO.I2C as I2C
 from azure.iot.device import IoTHubDeviceClient, Message
