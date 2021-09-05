@@ -1,6 +1,7 @@
 import Adafruit_GPIO.I2C as I2C
 import board
-#from adafruit_apds9960.apds9960 import APDS9960
+import time
+from adafruit_apds9960.apds9960 import APDS9960
 import busio
 import adafruit_apds9960.apds9960
 i2c = busio.I2C(board.SCL, board.SDA)
@@ -69,7 +70,7 @@ if __name__ == '__main__':
             print ( "Leyendo Sensores" )
             v_cerca = sensor.proximity
             print("Valor de Proximidad: ", v_cerca)
-            read_data_sensor()
+            readsensor()
             gesture_read()
             print ( "En espera por ", sleep_time, " segundos")
             print ( "*" * 40)
