@@ -17,7 +17,7 @@ sensor.enable_color = True
 
 
 # INICIO DE LA FUNCION DEL SENSOR APDS9960
-if __name__ == '__main__':
+try:
     print ( "Inicio de Prueba el Chip APDS9960" )
     print ( "Presione Ctrl-C para salir" )
     r, g, b, c = sensor.color_data
@@ -36,7 +36,7 @@ if __name__ == '__main__':
         elif gesture == 0x04:
             print("derecha")
 
-    except KeyboardInterrupt:
-        print ( "Prueba Terminada" )
+except KeyboardInterrupt:
+    print ( "Prueba Terminada" )
 
 # FIN DE LA FUNCION DEL SENSOR APDS9960
