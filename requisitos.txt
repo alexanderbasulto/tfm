@@ -9,4 +9,6 @@ blobconverter==1.0.0
 # depthai==2.5.0.0.dev+568cf1c566056eac5a039ebb9a1fa74436c495b5
 depthai==2.10.0.0
 pytube==11.0.0
-adafruit-circuitpython-apds9960
+Adafruit-Blinka
+adafruit-circuitpython-busdevice
+adafruit-circuitpython-register
