@@ -1,10 +1,10 @@
 import board
 import busio
 import adafruit_apds9960.apds9960
+from adafruit_apds9960.apds9960 import APDS9960
+
 i2c = busio.I2C(board.SCL, board.SDA)
 sensor = adafruit_apds9960.apds9960.APDS9960(i2c)
-
-I2C.require_repeated_start()
 
 apds = APDS9960(i2c)
 apds.enable_proximity = True
