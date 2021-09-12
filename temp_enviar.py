@@ -17,7 +17,7 @@ ta= 24.0
 sleep_time = 10
 aburrido = False
 dormido = False
-conn_str = "HostName=IothubTFM.azure-devices.net;DeviceId=gateway;SharedAccessKey=GdfSD3J6RF0Eou14oJwTkV+a86AXlrD0QEae3HxAguc="
+conn_str = "HostName=iot-hao.azure-devices.net;DeviceId=abasultotfmpi;SharedAccessKey=b8mCsILS1guwyNX8877td3hnBgjbG+uNS/CKbJJihdo="
 device_client = IoTHubDeviceClient.create_from_connection_string(conn_str)
 
 # Define the JSON message to send to IoT Hub.
