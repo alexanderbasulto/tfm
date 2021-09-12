@@ -14,7 +14,7 @@ I2C.require_repeated_start()
 #DEFINICION DE VARIABLE SGLOBALES
 tc = 36.5
 ta= 24.0
-sleep_time = 10
+sleep_time = 2
 aburrido = False
 dormido = False
 conn_str = "HostName=iot-hao.azure-devices.net;DeviceId=abasultotfmpi;SharedAccessKey=b8mCsILS1guwyNX8877td3hnBgjbG+uNS/CKbJJihdo="
@@ -30,7 +30,7 @@ class Melexis:
         self._i2c = I2C.Device(address,busnum=1)
 
     def readAmbient(self):
-        return self._readTemp(0x06)
+        return self._readTemp(0x06) 
 
     def readObject1(self):
         return self._readTemp(0x07)
