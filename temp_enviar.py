@@ -65,6 +65,7 @@ def iothub_send_data():
     # Send the message.
     print( "Enviando Mensaje a Iot-Hub: {}".format(message) )
     device_client.send_message(message)
+    print (message)
     print ( "Mensaje enviado con exito" )
     device_client.disconnect()
     return
