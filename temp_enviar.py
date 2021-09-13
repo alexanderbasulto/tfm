@@ -14,7 +14,7 @@ I2C.require_repeated_start()
 #DEFINICION DE VARIABLE SGLOBALES
 tc = 36.5
 ta= 24.0
-sleep_time = 2
+sleep_time = 10
 aburrido = False
 dormido = False
 conn_str = "HostName=abasultohub.azure-devices.net;DeviceId=abasultopi;SharedAccessKey=8TuTpJbjUAe3rWu0dwZM8Wyz3nLsCca6Hbo+VGHI/ws="
