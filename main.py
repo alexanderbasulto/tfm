@@ -39,6 +39,25 @@ device_client = IoTHubDeviceClient.create_from_connection_string(conn_str)
 # Define the JSON message to send to IoT Hub.
 MSG_TXT = '{{"ta": {ta},"tc": {tc},"aburrido": {aburrido},"dormido": {dormido}}}'
 #*
+class Melexis:
+
+    def __init__(self, address=0x5A):
+        self._i2c = I2C.Device(address,busnum=1)
+
+    def readAmbient(self):
+        return self._readTemp(0x06) 
+
+    def readObject1(self):
+        return self._readTemp(0x07)
+
+    def readObject2(self):
+        return self._readTemp(0x08)
+
+    def _readTemp(self, reg):
+        temp = self._i2c.readS16(reg)
+        #print("raw temp {}".format(temp))
+        temp = temp * .02 - 273.15
+        return temp
 
 def read_data_sensor():
     irsensor = Melexis()
@@ -54,13 +73,6 @@ def iothub_send_data():
     read_data_sensor()
     msg_txt_formatted = MSG_TXT.format(ta=ta, tc=tc, aburrido=aburrido, dormido=dormido)
     message = Message(msg_txt_formatted)
-    # Add a custom application property to the message.
-    # An IoT hub can filter on these properties without access to the message body.
-    #if tc > 37:
-    # message.custom_properties["tempAlert"] = "true"
-    #else:
-    # message.custom_properties["tempAlert"] = "false"
-    # Send the message.
     print( "Enviando Mensaje a Iot-Hub: {}".format(message) )
     device_client.send_message(message)
     print (message)
@@ -286,6 +298,7 @@ class Main:
                 if self.COUNTER >= 20:
                     cv2.putText(self.debug_frame, "ABURRIDO", (self.face_coords[count][0], self.face_coords[count][1]-10),cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 3)
                     BORINGEVENT = True
+                    global aburrido
                     aburrido = 1
                     iothub_send_data()
 
@@ -295,6 +308,7 @@ class Main:
                     self.TOTAL += 1
                 # Reset the eye frame counter
                 self.COUNTER = 0
+                global aburrido
                 aburrido = 0
                 iothub_send_data()
 
@@ -310,10 +324,12 @@ class Main:
             if self.TOTAL >= 50 or self.mTOTAL>=15 or self.hTOTAL >= 10:
                 cv2.putText(self.debug_frame, "DORMIDO", (100, 200),cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 3)
                 SLEEPEVENT = True    
+                global dormido
                 dormido = 1
                 iothub_send_data()
             else:
                 SLEEPEVENT = False    
+                global dormido
                 dormido = 0
                 iothub_send_data()
         except:
