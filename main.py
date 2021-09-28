@@ -249,6 +249,8 @@ class Main:
     
     
     def run_land68(self,face_frame,count):
+        global aburrido
+        global dormido
         try:
             nn_data = run_nn(self.land68_in,self.land68_nn, {"data": to_planar(face_frame, (160,160))})
             out = to_nn_result(nn_data)
@@ -296,7 +298,6 @@ class Main:
                 if self.COUNTER >= 20:
                     cv2.putText(self.debug_frame, "ABURRIDO", (self.face_coords[count][0], self.face_coords[count][1]-10),cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 3)
                     BORINGEVENT = True
-                    global aburrido
                     aburrido = 1
                     iothub_send_data()
 
@@ -306,7 +307,6 @@ class Main:
                     self.TOTAL += 1
                 # Reset the eye frame counter
                 self.COUNTER = 0
-                global aburrido
                 aburrido = 0
                 iothub_send_data()
 
@@ -322,12 +322,10 @@ class Main:
             if self.TOTAL >= 50 or self.mTOTAL>=15 or self.hTOTAL >= 10:
                 cv2.putText(self.debug_frame, "DORMIDO", (100, 200),cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 3)
                 SLEEPEVENT = True    
-                global dormido
                 dormido = 1
                 iothub_send_data()
             else:
                 SLEEPEVENT = False    
-                global dormido
                 dormido = 0
                 iothub_send_data()
         except:
