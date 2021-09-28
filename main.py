@@ -63,18 +63,18 @@ def read_data_sensor():
     irsensor = Melexis()
     tc = irsensor.readObject1()
     ta = irsensor.readAmbient()
-    print("T. Corporal: {}C , T. Ambiente: {}C".format(round(tc, 3), round(ta, 3)))
+    #print("T. Corporal: {}C , T. Ambiente: {}C".format(round(tc, 3), round(ta, 3)))
     return(tc,ta)
 
 def iothub_send_data():
-    print ( "Leyendo Sensores" )
+    #print ( "Leyendo Sensores" )
     read_data_sensor()
     msg_txt_formatted = MSG_TXT.format(ta=ta, tc=tc, aburrido=aburrido, dormido=dormido)
     message = Message(msg_txt_formatted)
-    print( "Enviando Mensaje a Iot-Hub: {}".format(message) )
+    #print( "Enviando Mensaje a Iot-Hub: {}".format(message) )
     device_client.send_message(message)
-    print (message)
-    print ( "Mensaje enviado con exito" )
+    #print (message)
+    #print ( "Mensaje enviado con exito" )
     device_client.disconnect()
     return
 
