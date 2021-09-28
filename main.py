@@ -28,8 +28,8 @@ if args.camera and args.video:
 elif args.camera is False and args.video is None:
     raise ValueError("Missing inference source! Either use \"-cam\" to run on DepthAI camera or \"-vid <path>\" to run on video file")
 
-tc = 36.5
-ta= 24.0
+tc = 36.2
+ta= 22.3
 sleep_time = 10
 aburrido = 0
 dormido = 0
@@ -68,14 +68,17 @@ def read_data_sensor():
 
 def iothub_send_data():
     #print ( "Leyendo Sensores" )
-    read_data_sensor()
-    msg_txt_formatted = MSG_TXT.format(ta=ta, tc=tc, aburrido=aburrido, dormido=dormido)
-    message = Message(msg_txt_formatted)
-    #print( "Enviando Mensaje a Iot-Hub: {}".format(message) )
-    device_client.send_message(message)
-    #print (message)
-    #print ( "Mensaje enviado con exito" )
-    device_client.disconnect()
+    #read_data_sensor()
+    if aburrido != aburrido_last or dormido != dormido_last:
+        aburrido_last = aburrido
+        dormido_last = dormido
+        msg_txt_formatted = MSG_TXT.format(ta=ta, tc=tc, aburrido=aburrido, dormido=dormido)
+        message = Message(msg_txt_formatted)
+        #print( "Enviando Mensaje a Iot-Hub: {}".format(message) )
+        device_client.send_message(message)
+        #print (message)
+        #print ( "Mensaje enviado con exito" )
+        device_client.disconnect()
     return
 
 
