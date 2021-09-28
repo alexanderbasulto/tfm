@@ -23,6 +23,10 @@ args = parser.parse_args()
 
 debug = not args.no_debug
 args.camera = True #
+if args.camera and args.video:
+    raise ValueError("Incorrect command line parameters! \"-cam\" cannot be used with \"-vid\"!")
+elif args.camera is False and args.video is None:
+    raise ValueError("Missing inference source! Either use \"-cam\" to run on DepthAI camera or \"-vid <path>\" to run on video file")
 
 tc = 36.5
 ta= 24.0
@@ -46,6 +50,7 @@ def read_data_sensor():
     return(tc,ta)
 
 def iothub_send_data():
+    print ( "Leyendo Sensores" )
     read_data_sensor()
     msg_txt_formatted = MSG_TXT.format(ta=ta, tc=tc, aburrido=aburrido, dormido=dormido)
     message = Message(msg_txt_formatted)
@@ -63,12 +68,6 @@ def iothub_send_data():
     device_client.disconnect()
     return
 
-
-
-if args.camera and args.video:
-    raise ValueError("Incorrect command line parameters! \"-cam\" cannot be used with \"-vid\"!")
-elif args.camera is False and args.video is None:
-    raise ValueError("Missing inference source! Either use \"-cam\" to run on DepthAI camera or \"-vid <path>\" to run on video file")
 
 def timer(function):
     """
