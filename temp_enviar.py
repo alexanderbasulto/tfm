@@ -11,7 +11,7 @@ from azure.iot.device import IoTHubDeviceClient, Message
 # az iot hub device-identity show-connection-string --hub-name {YourIoTHubName} --device-id MyNodeDevice --output table
 I2C.require_repeated_start()
 
-#DEFINICION DE VARIABLE SGLOBALES
+#DEFINICION DE VARIABLES GLOBALES
 tc = 36.5
 ta= 24.0
 sleep_time = 10

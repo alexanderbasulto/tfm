@@ -9,12 +9,7 @@ import os
 import time
 from tools import *
 from imutils.video import FPS
-import time
-import Adafruit_GPIO.I2C as I2C
-from azure.iot.device import IoTHubDeviceClient, Message
-I2C.require_repeated_start()
 
-#DEFINICION DE VARIABLES GLOBALES
 parser = argparse.ArgumentParser()
 parser.add_argument('-nd', '--no-debug', action="store_true", help="Prevent debug output")
 parser.add_argument('-cam', '--camera', action="store_true", help="Use DepthAI 4K RGB camera for inference (conflicts with -vid)")
@@ -23,47 +18,6 @@ args = parser.parse_args()
 
 debug = not args.no_debug
 args.camera = True #
-
-tc = 36.5
-ta= 24.0
-sleep_time = 10
-aburrido = 0
-dormido = 0
-conn_str = "HostName=abasultohub.azure-devices.net;DeviceId=abasultopi;SharedAccessKey=8TuTpJbjUAe3rWu0dwZM8Wyz3nLsCca6Hbo+VGHI/ws="
-device_client = IoTHubDeviceClient.create_from_connection_string(conn_str)
-
-# Define the JSON message to send to IoT Hub.
-MSG_TXT = '{{"ta": {ta},"tc": {tc},"aburrido": {aburrido},"dormido": {dormido}}}'
-#*
-
-def read_data_sensor():
-    irsensor = Melexis()
-    global tc
-    global ta
-    tc = irsensor.readObject1()
-    ta = irsensor.readAmbient()
-    print("T. Corporal: {}C , T. Ambiente: {}C".format(round(tc, 3), round(ta, 3)))
-    return(tc,ta)
-
-def iothub_send_data():
-    read_data_sensor()
-    msg_txt_formatted = MSG_TXT.format(ta=ta, tc=tc, aburrido=aburrido, dormido=dormido)
-    message = Message(msg_txt_formatted)
-    # Add a custom application property to the message.
-    # An IoT hub can filter on these properties without access to the message body.
-    #if tc > 37:
-    # message.custom_properties["tempAlert"] = "true"
-    #else:
-    # message.custom_properties["tempAlert"] = "false"
-    # Send the message.
-    print( "Enviando Mensaje a Iot-Hub: {}".format(message) )
-    device_client.send_message(message)
-    print (message)
-    print ( "Mensaje enviado con exito" )
-    device_client.disconnect()
-    return
-
-
 
 if args.camera and args.video:
     raise ValueError("Incorrect command line parameters! \"-cam\" cannot be used with \"-vid\"!")
@@ -273,7 +227,7 @@ class Main:
             if pitch < 0:
                 self.hCOUNTER += 1
                 if self.hCOUNTER >= 20:
-                    cv2.putText(self.debug_frame,"ABURRIDO",(self.face_coords[count][0],self.face_coords[count][1]-10),cv2.FONT_HERSHEY_COMPLEX,1,(0,0,255),3)
+                    cv2.putText(self.debug_frame,"BORING",(self.face_coords[count][0],self.face_coords[count][1]-10),cv2.FONT_HERSHEY_COMPLEX,1,(0,0,255),3)
             else:
                 if self.hCOUNTER >= 3:
                     self.hTOTAL += 1
@@ -287,17 +241,12 @@ class Main:
                 if self.COUNTER >= 20:
                     cv2.putText(self.debug_frame, "ABURRIDO", (self.face_coords[count][0], self.face_coords[count][1]-10),cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 3)
                     BORINGEVENT = True
-                    aburrido = 1
-                    iothub_send_data()
-
             else:
                 # If it is less than the threshold 3 times in a row, it means that an eye blink has been performed
                 if self.COUNTER >= 3:# Threshold: 3
                     self.TOTAL += 1
                 # Reset the eye frame counter
                 self.COUNTER = 0
-                aburrido = 0
-                iothub_send_data()
 
             mouth_ratio = self.mouth_aspect_ratio(mouth)
             if mouth_ratio > 0.5:
@@ -310,13 +259,7 @@ class Main:
             cv2.putText(self.debug_frame,"eye:{:d},mouth:{:d},head:{:d}".format(self.TOTAL,self.mTOTAL,self.hTOTAL),(10,40),cv2.FONT_HERSHEY_COMPLEX_SMALL,0.5,(255,0,0,))
             if self.TOTAL >= 50 or self.mTOTAL>=15 or self.hTOTAL >= 10:
                 cv2.putText(self.debug_frame, "DORMIDO", (100, 200),cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 3)
-                SLEEPEVENT = True    
-                dormido = 1
-                iothub_send_data()
-            else:
-                SLEEPEVENT = False    
-                dormido = 0
-                iothub_send_data()
+                SLEEPEVENT = True       
         except:
             pass
     
