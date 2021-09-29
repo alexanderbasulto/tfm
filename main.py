@@ -73,7 +73,8 @@ def iothub_send_data():
     global dormido
     global aburrido_last
     global dormido_last
-    print ( "Leyendo Sensores" )
+    global MSG_TXT
+    #print ( "Leyendo Sensores" )
     #read_data_sensor()
     if aburrido != aburrido_last or dormido != dormido_last:
         aburrido_last = aburrido
