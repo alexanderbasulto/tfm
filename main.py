@@ -67,7 +67,7 @@ def read_data_sensor():
     return(tc,ta)
 
 def iothub_send_data():
-    #print ( "Leyendo Sensores" )
+    print ( "Leyendo Sensores" )
     #read_data_sensor()
     if aburrido != aburrido_last or dormido != dormido_last:
         aburrido_last = aburrido
@@ -76,7 +76,7 @@ def iothub_send_data():
         message = Message(msg_txt_formatted)
         #print( "Enviando Mensaje a Iot-Hub: {}".format(message) )
         device_client.send_message(message)
-        #print (message)
+        print (message)
         #print ( "Mensaje enviado con exito" )
         device_client.disconnect()
     return
