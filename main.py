@@ -308,10 +308,9 @@ class Main:
                 self.COUNTER += 1
                 if self.COUNTER >= 20:
                     cv2.putText(self.debug_frame, "ABURRIDO", (self.face_coords[count][0], self.face_coords[count][1]-10),cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 3)
-                    aburrido = 1
                     BORINGEVENT = True
-                    
-                    
+                    aburrido = 1
+                    print ("punto 1")         
             else:
                 # If it is less than the threshold 3 times in a row, it means that an eye blink has been performed
                 if self.COUNTER >= 3:# Threshold: 3
@@ -319,6 +318,7 @@ class Main:
                 # Reset the eye frame counter
                 self.COUNTER = 0
                 aburrido = 0
+                print ("punto 2")
 
             mouth_ratio = self.mouth_aspect_ratio(mouth)
             if mouth_ratio > 0.5:
@@ -333,10 +333,11 @@ class Main:
                 cv2.putText(self.debug_frame, "DORMIDO", (100, 200),cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 3)
                 SLEEPEVENT = True    
                 dormido = 1
+                print ("punto 3")
 
             else:
-                SLEEPEVENT = False    
                 dormido = 0
+                print ("punto 4")
         except:
             pass
     
