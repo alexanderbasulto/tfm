@@ -319,6 +319,8 @@ class Main:
                     self.TOTAL += 1
                 # Reset the eye frame counter
                 self.COUNTER = 0
+                SLEEPEVENT = True
+                dormido = 0
                 aburrido = 0
                 print ("punto 2")
 
@@ -331,7 +333,7 @@ class Main:
                 self.mCOUNTER = 0
 
             cv2.putText(self.debug_frame,"eye:{:d},mouth:{:d},head:{:d}".format(self.TOTAL,self.mTOTAL,self.hTOTAL),(10,40),cv2.FONT_HERSHEY_COMPLEX_SMALL,0.5,(255,0,0,))
-            if self.TOTAL >= 50 or self.mTOTAL>=15 or self.hTOTAL >= 10:
+            if self.TOTAL >= 25 or self.mTOTAL>=7 or self.hTOTAL >= 5:
                 cv2.putText(self.debug_frame, "DORMIDO", (100, 200),cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 3)
                 SLEEPEVENT = True    
                 dormido = 1
