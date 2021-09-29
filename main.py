@@ -33,6 +33,8 @@ ta= 22.3
 sleep_time = 10
 aburrido = 0
 dormido = 0
+aburrido_last = 0
+dormido_last = 0
 conn_str = "HostName=abasultohub.azure-devices.net;DeviceId=abasultopi;SharedAccessKey=8TuTpJbjUAe3rWu0dwZM8Wyz3nLsCca6Hbo+VGHI/ws="
 device_client = IoTHubDeviceClient.create_from_connection_string(conn_str)
 
