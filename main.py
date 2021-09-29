@@ -160,7 +160,7 @@ def create_pipeline(camera):
         print("Creating Color Camera...")
         cam = pipeline.createColorCamera()
         cam.setPreviewSize(300,300)
-        cam.setResolution(depthai.ColorCameraProperties.SensorResolution.THE_720_P)
+        cam.setResolution(depthai.ColorCameraProperties.SensorResolution.THE_1080_P)
         cam.setInterleaved(False)
         cam.setBoardSocket(depthai.CameraBoardSocket.RGB)
         cam_xout = pipeline.createXLinkOut()
