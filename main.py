@@ -73,7 +73,7 @@ def iothub_send_data():
     global dormido
     global aburrido_last
     global dormido_last
-    print ( "Aburrido:", aburrido, " Aburrido_last:", aburrido_last, " Dormido:", dormido, " Dormido_last:", dormido_last)
+    #print ( "Aburrido:", aburrido, " Aburrido_last:", aburrido_last, " Dormido:", dormido, " Dormido_last:", dormido_last)
     #read_data_sensor()
     if aburrido != aburrido_last or dormido != dormido_last:
         aburrido_last = aburrido
@@ -297,7 +297,7 @@ class Main:
                 if self.hCOUNTER >= 20:
                     cv2.putText(self.debug_frame,"ABURRIDO",(self.face_coords[count][0],self.face_coords[count][1]-10),cv2.FONT_HERSHEY_COMPLEX,1,(0,0,255),3)
                     aburrido = 1
-                    print ("punto 0")
+                    #print ("punto 0")
             else:
                 if self.hCOUNTER >= 3:
                     self.hTOTAL += 1
@@ -312,7 +312,7 @@ class Main:
                     cv2.putText(self.debug_frame, "ABURRIDO", (self.face_coords[count][0], self.face_coords[count][1]-10),cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 3)
                     BORINGEVENT = True
                     aburrido = 1
-                    print ("punto 1")         
+                    #print ("punto 1")         
             else:
                 # If it is less than the threshold 3 times in a row, it means that an eye blink has been performed
                 if self.COUNTER >= 3:# Threshold: 3
@@ -322,7 +322,7 @@ class Main:
                 SLEEPEVENT = True
                 dormido = 0
                 aburrido = 0
-                print ("punto 2")
+                #print ("punto 2")
 
             mouth_ratio = self.mouth_aspect_ratio(mouth)
             if mouth_ratio > 0.5:
@@ -337,11 +337,11 @@ class Main:
                 cv2.putText(self.debug_frame, "DORMIDO", (100, 200),cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 3)
                 SLEEPEVENT = True    
                 dormido = 1
-                print ("punto 3")
+                #print ("punto 3")
 
             else:
                 dormido = 0
-                print ("punto 4")
+                #print ("punto 4")
         except:
             pass
     
