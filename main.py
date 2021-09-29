@@ -73,7 +73,6 @@ def iothub_send_data():
     global dormido
     global aburrido_last
     global dormido_last
-    global MSG_TXT
     print ( "Leyendo Sensores" )
     #read_data_sensor()
     if aburrido != aburrido_last or dormido != dormido_last:
@@ -86,7 +85,8 @@ def iothub_send_data():
         print (message)
         #print ( "Mensaje enviado con exito" )
         device_client.disconnect()
-    return
+    else:
+        
 
 
 def timer(function):
