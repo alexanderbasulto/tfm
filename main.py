@@ -296,6 +296,8 @@ class Main:
                 self.hCOUNTER += 1
                 if self.hCOUNTER >= 20:
                     cv2.putText(self.debug_frame,"ABURRIDO",(self.face_coords[count][0],self.face_coords[count][1]-10),cv2.FONT_HERSHEY_COMPLEX,1,(0,0,255),3)
+                    aburrido = 1
+                    print ("punto 0")
             else:
                 if self.hCOUNTER >= 3:
                     self.hTOTAL += 1
