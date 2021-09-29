@@ -85,8 +85,7 @@ def iothub_send_data():
         print (message)
         #print ( "Mensaje enviado con exito" )
         device_client.disconnect()
-    else:
-        
+    return
 
 
 def timer(function):
