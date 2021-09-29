@@ -264,7 +264,6 @@ class Main:
         global aburrido_last
         global dormido_last
         try:
-            iothub_send_data()
             nn_data = run_nn(self.land68_in,self.land68_nn, {"data": to_planar(face_frame, (160,160))})
             out = to_nn_result(nn_data)
             result = frame_norm(face_frame,*out)
@@ -312,6 +311,7 @@ class Main:
                     cv2.putText(self.debug_frame, "ABURRIDO", (self.face_coords[count][0], self.face_coords[count][1]-10),cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 3)
                     BORINGEVENT = True
                     aburrido = 1
+                    iothub_send_data()
                     
             else:
                 # If it is less than the threshold 3 times in a row, it means that an eye blink has been performed
@@ -320,6 +320,7 @@ class Main:
                 # Reset the eye frame counter
                 self.COUNTER = 0
                 aburrido = 0
+                iothub_send_data()
 
             mouth_ratio = self.mouth_aspect_ratio(mouth)
             if mouth_ratio > 0.5:
@@ -334,10 +335,12 @@ class Main:
                 cv2.putText(self.debug_frame, "DORMIDO", (100, 200),cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 3)
                 SLEEPEVENT = True    
                 dormido = 1
+                iothub_send_data()
 
             else:
                 SLEEPEVENT = False    
                 dormido = 0
+                iothub_send_data()
         except:
             pass
     
