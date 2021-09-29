@@ -259,12 +259,12 @@ class Main:
     
     
     def run_land68(self,face_frame,count):
-        global aburrido
-        global dormido
-        global aburrido_last
-        global dormido_last
-        iothub_send_data()
         try:
+            global aburrido
+            global dormido
+            global aburrido_last
+            global dormido_last
+            iothub_send_data()
             nn_data = run_nn(self.land68_in,self.land68_nn, {"data": to_planar(face_frame, (160,160))})
             out = to_nn_result(nn_data)
             result = frame_norm(face_frame,*out)
